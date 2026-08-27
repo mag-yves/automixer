@@ -6,3 +6,4 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 VIDEOS_SOURCE = BASE_DIR / "videosource"
 SOUNDS_SOURCE = BASE_DIR / "soundsource"
+SOUND_USAGE_LOG = BASE_DIR / "sound_usage_log.json"

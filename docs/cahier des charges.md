@@ -46,6 +46,8 @@ Le script doit traiter plusieurs vidéos de manière automatisée sur l’ensemb
 ### 4.2 Sélection audio
 - Le choix du fichier audio doit être aléatoire.
 - La sélection doit pouvoir être contrôlée pour éviter des répétitions immédiates du même son dans une suite de traitements.
+- Un journal d'utilisation (`sound_usage_log.json`) conserve un compteur d'utilisation par fichier son.
+- Pour garantir une répartition uniforme de l'usage des sons, le tirage au sort est restreint aux 20 sons les moins utilisés parmi les candidats disponibles.
 
 ### 4.3 Durée du son
 - La durée de la vidéo sert de référence.
@@ -134,6 +136,7 @@ Chaque phase doit être validée avant de passer à la suivante.
 
 ### 7.3 Sélection aléatoire contrôlée
 - La sélection du son reste aléatoire, mais peut éviter les répétitions immédiates du même fichier pour un rendu plus varié.
+- Un compteur d'utilisation par son est tenu à jour dans un journal persistant, afin de privilégier les 20 sons les moins utilisés lors de chaque tirage et d'assurer une répartition uniforme sur l'ensemble de la banque de sons.
 
 ### 7.4 Gestion des erreurs et fichiers non valides
 - Les vidéos ou sons illisibles ou corrompus doivent être détectés.

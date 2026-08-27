@@ -7,7 +7,9 @@ from pathlib import Path
 from automixer.audio_processor import replace_audio_in_video
 from automixer.media_selector import choose_audio_for_video, get_media_duration
 from automixer.output_manager import append_sound_log, get_next_output_path
+from automixer.sound_usage import increment_usage, load_usage_counts, save_usage_counts
 from automixer.source_validator import validate_sources
+from config.settings import SOUND_USAGE_LOG
 
 
 def log_phase(message: str) -> None:
@@ -15,9 +17,14 @@ def log_phase(message: str) -> None:
     print(f"[{timestamp}] {message}")
 
 
-def process_videos(videos_root: Path | str, sounds_root: Path | str) -> list[Path]:
+def process_videos(
+    videos_root: Path | str,
+    sounds_root: Path | str,
+    usage_log_path: Path | str | None = None,
+) -> list[Path]:
     videos_root = Path(videos_root)
     sounds_root = Path(sounds_root)
+    usage_log_path = Path(usage_log_path) if usage_log_path is not None else SOUND_USAGE_LOG
 
     log_phase("Début du traitement")
     validation = validate_sources(videos_root, sounds_root)
@@ -29,6 +36,7 @@ def process_videos(videos_root: Path | str, sounds_root: Path | str) -> list[Pat
     if not validation.audio_files:
         raise FileNotFoundError(f"Aucun fichier audio .mp3 trouvé dans {sounds_root}")
 
+    usage_counts = load_usage_counts(usage_log_path)
     handled: list[Path] = []
     previous_audio: Path | None = None
 
@@ -41,10 +49,12 @@ def process_videos(videos_root: Path | str, sounds_root: Path | str) -> list[Pat
                 raise ValueError(f"Impossible de lire la durée de la vidéo : {video_path}")
 
             output_path = get_next_output_path(video_path)
-            audio_file = choose_audio_for_video(video_path, validation.audio_files, previous_audio)
+            audio_file = choose_audio_for_video(video_path, validation.audio_files, previous_audio, usage_counts)
             previous_audio = audio_file
+            increment_usage(usage_counts, audio_file)
+            save_usage_counts(usage_log_path, usage_counts)
 
-            log_phase(f"Son choisi: {audio_file.name}")
+            log_phase(f"Son choisi: {audio_file.name} (utilisé {usage_counts[audio_file.name]} fois)")
 
             audio_duration = get_media_duration(audio_file)
             log_phase(

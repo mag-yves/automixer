@@ -53,7 +53,7 @@ class Phase7StabilizationTests(unittest.TestCase):
                     check=True,
                 )
 
-            outputs = process_videos(videos_root, sounds_root)
+            outputs = process_videos(videos_root, sounds_root, usage_log_path=root / "sound_usage_log.json")
 
             self.assertEqual(len(outputs), 1)
             self.assertTrue(outputs[0].exists())

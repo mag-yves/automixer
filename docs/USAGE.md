@@ -44,7 +44,7 @@ PY
 ## Comportement
 
 Pour chaque vidéo détectée dans `videosource` :
-- un fichier son est choisi aléatoirement dans `soundsource`
+- un fichier son est choisi aléatoirement dans `soundsource`, en privilégiant les 20 sons les moins utilisés (compteur tenu dans `sound_usage_log.json`)
 - la piste audio de la vidéo est remplacée
 - le son est coupé pour correspondre à la durée de la vidéo
 - la sortie est enregistrée sous le format :
@@ -57,6 +57,7 @@ Pour chaque vidéo détectée dans `videosource` :
 
 - Les sorties sont incrémentées pour éviter d’écraser les précédents résultats.
 - Les dossiers `videosource/` et `soundsource/` sont exclus du dépôt Git via `.gitignore`.
+- Le journal `sound_usage_log.json` (à la racine du projet) est également exclu du dépôt Git car il s’agit de données locales générées.
 - Les logs du traitement s’affichent dans le terminal avec horodatage.
 
 ## Tests

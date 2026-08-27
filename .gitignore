@@ -1,6 +1,9 @@
 videosource/
 soundsource/
 
+# Journal d'utilisation des sons (données locales générées)
+sound_usage_log.json
+
 # Python cache/bytecode
 __pycache__/
 *.py[cod]
