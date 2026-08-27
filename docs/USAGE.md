@@ -51,7 +51,7 @@ Pour chaque vidéo détectée dans `videosource` :
   - `nom_video_snd_1.mp4`
   - `nom_video_snd_2.mp4`
   - etc.
-- un fichier `sound.txt` est ajouté dans le dossier de la vidéo avec le nom du son utilisé et l’horodatage
+- un fichier `<nom_du_sous-dossier>_sound_<n>.txt` est ajouté dans le dossier de la vidéo avec le nom du son utilisé et l’horodatage
 
 ## Remarques importantes
 

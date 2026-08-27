@@ -68,7 +68,7 @@ class Phase6ValidationTests(unittest.TestCase):
                 self.assertTrue(output.exists())
 
             for folder in [first_dir, second_dir]:
-                log_file = folder / f"{folder.name}_sound.txt"
+                log_file = folder / f"{folder.name}_sound_1.txt"
                 self.assertTrue(log_file.exists())
                 self.assertIn("video=", log_file.read_text(encoding="utf-8"))
 

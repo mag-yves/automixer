@@ -41,12 +41,23 @@ class OutputManagerTests(unittest.TestCase):
             log_path = append_sound_log(root, video, audio, output)
 
             self.assertTrue(log_path.exists())
-            self.assertEqual(log_path.name, f"{root.name}_sound.txt")
+            self.assertEqual(log_path.name, f"{root.name}_sound_1.txt")
             content = log_path.read_text(encoding="utf-8")
             self.assertIn("video.mp4", content)
             self.assertIn("intro.mp3", content)
             self.assertIn("video_snd_1.mp4", content)
             self.assertIn("[", content)
+
+    def test_append_sound_log_uses_output_iteration(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            video = root / "video.mp4"
+            audio = root / "intro.mp3"
+            output = root / "video_snd_2.mp4"
+
+            log_path = append_sound_log(root, video, audio, output)
+
+            self.assertEqual(log_path.name, f"{root.name}_sound_2.txt")
 
 
 if __name__ == "__main__":

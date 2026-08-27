@@ -29,9 +29,11 @@ def get_next_output_path(video_path: Path) -> Path:
 
 
 def append_sound_log(log_dir: Path, video_path: Path, audio_path: Path, output_path: Path) -> Path:
-    """Ajoute une ligne de log horodatée dans un fichier nommé selon le sous-dossier."""
+    """Ajoute une ligne de log horodatée dans un fichier d'itération."""
     subfolder_name = log_dir.name
-    log_path = log_dir / f"{subfolder_name}_sound.txt"
+    match = re.search(r"_snd_(\d+)$", output_path.stem)
+    iteration = match.group(1) if match else "1"
+    log_path = log_dir / f"{subfolder_name}_sound_{iteration}.txt"
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     line = (
         f"[{timestamp}] video={video_path.name} | "

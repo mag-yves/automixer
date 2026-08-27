@@ -59,7 +59,7 @@ La vidéo de sortie est enregistrée sous le format :
 Le suffixe `_snd_<n>` porte un numéro incrémental pour permettre plusieurs traitements successifs sans écraser les fichiers déjà générés.
 
 ### 4.5 Journalisation
-Le script doit ajouter un fichier `sound.txt` dans le dossier traité.
+Le script doit ajouter un fichier `<nom_du_sous-dossier>_sound_<n>.txt` dans le dossier traité, avec le même numéro d'itération que la vidéo de sortie.
 
 Ce fichier doit contenir au minimum :
 - le nom du fichier audio utilisé
@@ -105,7 +105,7 @@ Chaque phase doit être validée avant de passer à la suivante.
 - contrôle de la validité du fichier produit
 
 ### Phase 5 - Journalisation et traçabilité
-- création du fichier `sound.txt`
+- création du fichier `<nom_du_sous-dossier>_sound_<n>.txt` avec le numéro d'itération
 - enregistrement du son utilisé
 - ajout de détails utiles pour le suivi du traitement
 
@@ -145,7 +145,7 @@ Chaque phase doit être validée avant de passer à la suivante.
 - Le script vérifie ensuite que le fichier exporté est bien conforme et exploitable.
 
 ### 7.6 Journalisation détaillée
-- Le fichier `sound.txt` contient le nom du son utilisé ainsi que, si possible, la date et l’heure du traitement.
+- Le fichier `<nom_du_sous-dossier>_sound_<n>.txt` contient le nom du son utilisé ainsi que, si possible, la date et l’heure du traitement.
 - Le script conserve une trace exploitable pour chaque fichier traité.
 
 ### 7.7 Log horodaté en terminal par phase de traitement
@@ -157,7 +157,7 @@ Exemple :
 - `[2026-08-26 14:30:14] Son choisi : intro_42.mp3`
 - `[2026-08-26 14:30:15] Son coupé à la durée de la vidéo`
 - `[2026-08-26 14:30:16] Sortie enregistrée : video_snd_1.mp4`
-- `[2026-08-26 14:30:17] Fichier sound.txt mis à jour`
+- `[2026-08-26 14:30:17] Fichier d01_sound_1.txt mis à jour`
 
 Ces logs permettent de suivre précisément chaque traitement, étape par étape, dans le terminal.
 
@@ -185,7 +185,7 @@ Le projet sera considéré comme validé lorsque :
 - la durée du son est adaptée à celle de la vidéo
 - les sorties sont générées avec un nom incrémental unique
 - les fichiers précédents ne sont pas écrasés
-- un log `sound.txt` est créé pour chaque vidéo traitée
+- un log `<nom_du_sous-dossier>_sound_<n>.txt` est créé pour chaque vidéo traitée
 - les erreurs sont signalées sans interrompre le traitement du lot
 - les logs terminal sont lisibles et suffisamment détaillés
 - le script fonctionne sur plusieurs relances successives sans conflit

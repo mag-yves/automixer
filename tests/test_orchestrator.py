@@ -54,8 +54,8 @@ class OrchestratorTests(unittest.TestCase):
 
             self.assertEqual(len(outputs), 1)
             self.assertTrue(outputs[0].exists())
-            self.assertTrue((videos_root / f"{videos_root.name}_sound.txt").exists())
-            content = (videos_root / f"{videos_root.name}_sound.txt").read_text(encoding="utf-8")
+            self.assertTrue((videos_root / f"{videos_root.name}_sound_1.txt").exists())
+            content = (videos_root / f"{videos_root.name}_sound_1.txt").read_text(encoding="utf-8")
             self.assertIn("intro.mp3", content)
             self.assertIn("clip", content)
 
