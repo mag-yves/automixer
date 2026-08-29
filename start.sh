@@ -6,9 +6,10 @@ cd "$(dirname "$0")"
 while true; do
     echo
     echo "=== AutomMixer ==="
-    echo "  1) Démarrer l'attribution des sons"
-    echo "  2) Mettre à jour les usages"
-    echo "  Q) Quitter"
+    echo "1) Démarrer l'attribution des sons"
+    echo "2) Mettre à jour les usages"
+    echo
+    echo "Q) Quitter"
     echo
     read -rp "Choix : " choice
 
