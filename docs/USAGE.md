@@ -11,12 +11,25 @@
 ## Structure du projet
 
 - `automixer/` : modules Python du projet
+- `config/` : paramètres et chemins du projet
 - `docs/` : documentation
 - `videosource/` : vidéos à traiter
 - `soundsource/` : fichiers audio de remplacement
+- `videostorage/` : archives des vidéos déjà traitées (analysées par `update-usage.sh`)
 - `tests/` : tests unitaires
 
 ## Lancement du script
+
+Le plus simple est d'utiliser le menu interactif :
+
+```bash
+./start.sh
+```
+
+Il propose :
+- `1` : démarrer l'attribution des sons (`generate.sh`)
+- `2` : mettre à jour les usages (`update-usage.sh`)
+- `Q` : quitter
 
 Le point d’entrée le plus simple est le script racine :
 
@@ -52,6 +65,28 @@ Pour chaque vidéo détectée dans `videosource` :
   - `nom_video_snd_2.mp4`
   - etc.
 - un fichier `<nom_du_sous-dossier>_sound_<n>.txt` est ajouté dans le dossier de la vidéo avec le nom du son utilisé et l’horodatage
+
+## Mise à jour manuelle du journal d'utilisation
+
+Le journal `sound_usage_log.json` peut être reconstruit à tout moment à partir des fichiers de log présents sur le disque :
+
+```bash
+./update-usage.sh
+```
+
+ou directement :
+
+```bash
+python3 update_usage.py [dossier_racine] [--log chemin/sound_usage_log.json]
+```
+
+Comportement :
+- exploration récursive du dossier racine (par défaut `videostorage/`)
+- prise en compte des fichiers `sound.txt`, `<n...>_sound.txt`, `<n...>_<n...>_sound.txt` et `<n...>_<n...>_sound_<n>.txt`
+- extraction de chaque valeur `audio=` : une occurrence = une utilisation
+- réécriture des compteurs de `sound_usage_log.json` à partir des valeurs comptées ; les sons déjà présents dans le journal mais absents du scan sont conservés avec un compteur à `0`
+
+Utile après un déplacement de vidéos, une perte du journal ou un traitement effectué hors du script.
 
 ## Remarques importantes
 

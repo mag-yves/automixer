@@ -172,11 +172,17 @@ Ces logs permettent de suivre précisément chaque traitement, étape par étape
 - Un mode de test permet d’exécuter les traitements en simulation sans générer de fichiers finaux.
 - Cela permet de vérifier le comportement avant l’exécution réelle.
 
-### 7.10 Paramétrage configurable
+### 7.10 Reconstruction manuelle du journal d'utilisation
+- Une commande déclenchable manuellement (`update-usage.sh`) permet de reconstruire `sound_usage_log.json`.
+- Elle recherche récursivement les fichiers de log de traitement (`sound.txt`, `<n...>_sound.txt`, `<n...>_<n...>_sound.txt`, `<n...>_<n...>_sound_<n>.txt`) dans un dossier racine (par défaut `videostorage`).
+- Chaque valeur `audio=` trouvée compte pour une utilisation du son correspondant.
+- Les compteurs du journal sont mis à jour à partir de ce comptage ; les sons connus mais non rencontrés sont conservés avec un compteur à zéro.
+
+### 7.11 Paramétrage configurable
 - Les chemins `videosource`, `soundsource` et de sortie doivent être paramétrables.
 - Il est utile de rendre le suffixe, le mode de sélection du son et le niveau de log configurables.
 
-### 7.11 Vérification du rendu final
+### 7.12 Vérification du rendu final
 - Après export, le script vérifie que le fichier final existe bien et contient un flux audio valide.
 - En cas d’anomalie, il signale clairement l’erreur.
 

@@ -1,5 +1,7 @@
 videosource/
 soundsource/
+soundstorage/
+videostorage
 
 # Journal d'utilisation des sons (données locales générées)
 sound_usage_log.json
