@@ -7,7 +7,7 @@ from pathlib import Path
 from automixer.audio_processor import replace_audio_in_video
 from automixer.media_selector import choose_audio_for_video, get_media_duration
 from automixer.output_manager import append_sound_log, get_next_output_path
-from automixer.sound_usage import increment_usage, load_usage_counts, save_usage_counts
+from automixer.sound_usage import load_usage_counts
 from automixer.source_validator import validate_sources
 from config.settings import SOUND_USAGE_LOG
 
@@ -51,10 +51,8 @@ def process_videos(
             output_path = get_next_output_path(video_path)
             audio_file = choose_audio_for_video(video_path, validation.audio_files, previous_audio, usage_counts)
             previous_audio = audio_file
-            increment_usage(usage_counts, audio_file)
-            save_usage_counts(usage_log_path, usage_counts)
 
-            log_phase(f"Son choisi: {audio_file.name} (utilisé {usage_counts[audio_file.name]} fois)")
+            log_phase(f"Son choisi: {audio_file.name}")
 
             audio_duration = get_media_duration(audio_file)
             log_phase(
