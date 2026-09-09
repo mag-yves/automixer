@@ -7,7 +7,6 @@ from pathlib import Path
 from automixer.audio_processor import replace_audio_in_video
 from automixer.media_selector import choose_audio_for_video, get_media_duration
 from automixer.output_manager import append_sound_log, get_next_output_path
-from automixer.sound_usage import load_usage_counts
 from automixer.source_validator import validate_sources
 from config.settings import SOUND_USAGE_LOG
 
@@ -36,7 +35,7 @@ def process_videos(
     if not validation.audio_files:
         raise FileNotFoundError(f"Aucun fichier audio .mp3 trouvé dans {sounds_root}")
 
-    usage_counts = load_usage_counts(usage_log_path)
+    # sound_usage_log.json n'est plus consulté ici : il n'est utilisé qu'à des fins statistiques.
     handled: list[Path] = []
     previous_audio: Path | None = None
 
@@ -49,7 +48,7 @@ def process_videos(
                 raise ValueError(f"Impossible de lire la durée de la vidéo : {video_path}")
 
             output_path = get_next_output_path(video_path)
-            audio_file = choose_audio_for_video(video_path, validation.audio_files, previous_audio, usage_counts)
+            audio_file = choose_audio_for_video(video_path, validation.audio_files, previous_audio)
             previous_audio = audio_file
 
             log_phase(f"Son choisi: {audio_file.name}")

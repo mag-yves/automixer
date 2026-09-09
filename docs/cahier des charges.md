@@ -46,8 +46,8 @@ Le script doit traiter plusieurs vidéos de manière automatisée sur l’ensemb
 ### 4.2 Sélection audio
 - Le choix du fichier audio doit être aléatoire.
 - La sélection doit pouvoir être contrôlée pour éviter des répétitions immédiates du même son dans une suite de traitements.
-- Un journal d'utilisation (`sound_usage_log.json`) peut conserver un compteur d'utilisation par fichier son.
-- Pour garantir une répartition uniforme de l'usage des sons, le tirage au sort est restreint aux 20 sons les moins utilisés parmi les candidats disponibles, sans mettre à jour le compteur lors de l'attribution.
+- Un journal d'utilisation (`sound_usage_log.json`) conserve un compteur d'utilisation par fichier son, à des fins statistiques uniquement.
+- Le tirage au sort se fait de manière uniforme parmi tous les sons disponibles, quel que soit leur usage passé.
 
 ### 4.3 Durée du son
 - La durée de la vidéo sert de référence.
@@ -136,7 +136,7 @@ Chaque phase doit être validée avant de passer à la suivante.
 
 ### 7.3 Sélection aléatoire contrôlée
 - La sélection du son reste aléatoire, mais peut éviter les répétitions immédiates du même fichier pour un rendu plus varié.
-- Un compteur d'utilisation par son peut être chargé depuis un journal persistant, afin de privilégier les 20 sons les moins utilisés lors de chaque tirage et d'assurer une répartition uniforme sur l'ensemble de la banque de sons.
+- Le tirage est uniforme sur l'ensemble des sons disponibles : le compteur d'utilisation du journal persistant ne sert qu'à des fins statistiques et n'influence pas la sélection.
 - Ce compteur n'est pas mis à jour pendant l'attribution des sons ; sa reconstruction reste déclenchée manuellement.
 
 ### 7.4 Gestion des erreurs et fichiers non valides
@@ -175,8 +175,8 @@ Ces logs permettent de suivre précisément chaque traitement, étape par étape
 
 ### 7.10 Reconstruction manuelle du journal d'utilisation
 - Une commande déclenchable manuellement (`update-usage.sh`) permet de reconstruire `sound_usage_log.json`.
-- Elle recherche récursivement les fichiers de log de traitement (`sound.txt`, `<n...>_sound.txt`, `<n...>_<n...>_sound.txt`, `<n...>_<n...>_sound_<n>.txt`) dans un dossier racine (par défaut `videostorage`).
-- Chaque valeur `audio=` trouvée compte pour une utilisation du son correspondant.
+- Elle recherche récursivement les fichiers `<n...>_metadata.json` dans un dossier racine (par défaut `videostorage`).
+- La clé `audio` de chaque fichier metadata, lorsqu'elle est présente, compte pour une utilisation du son correspondant.
 - Les compteurs du journal sont mis à jour à partir de ce comptage ; les sons connus mais non rencontrés sont conservés avec un compteur à zéro.
 
 ### 7.11 Paramétrage configurable
