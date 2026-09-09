@@ -9,6 +9,7 @@ while true; do
     echo
     echo "1) Démarrer l'attribution des sons"
     echo "2) Mettre à jour les usages"
+    echo "3) Afficher le dashboard des usages"
     echo
     echo "Q) Quitter"
     echo
@@ -20,6 +21,9 @@ while true; do
             ;;
         2)
             ./update-usage.sh || echo "Échec de la mise à jour des usages."
+            ;;
+        3)
+            ./show-usage.sh || echo "Échec de l'affichage du dashboard."
             ;;
         q|Q)
             echo "Au revoir."
