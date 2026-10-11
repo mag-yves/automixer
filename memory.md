@@ -14,7 +14,10 @@
 - Utilitaires : `update-usage.sh` (reconstruction du journal), `show-usage.sh` (dashboard),
   `start.sh` (menu). Sélection **uniforme** (commit `96f13bd`) : le journal d'usage est
   purement statistique et ne pèse plus sur le tirage.
-- **29 tests** `unittest` verts (`python3 -m unittest discover -s tests`), FFmpeg 8.x.
+- **Attributions multiples** : `ASSIGNMENTS_PER_VIDEO` (`config/settings.py`, défaut 2) →
+  chaque vidéo reçoit N sorties, tirage aléatoire **frais** avant chaque attribution
+  (anti-répétition immédiate conservée). Validé sur le lot réel (3 vidéos × 2 = 6 sorties).
+- **31 tests** `unittest` verts (`python3 -m unittest discover -s tests`), FFmpeg 8.x.
 
 ## Dette / points d'attention
 
@@ -24,8 +27,8 @@
   durée du son (non testé). À vérifier / corriger (🟠).
 - **CDC partiellement non couvert** : §7.8 bilan global, §7.9 dry-run, §7.12 vérification
   post-export du flux audio — absents du code.
-- **Nettoyage** : détection de durée dupliquée (`media_selector` / `audio_processor`), import
-  `random` inutilisé (`orchestrator.py:3`), logs via `print` plutôt que `logging`.
+- **Nettoyage** : détection de durée dupliquée (`media_selector` / `audio_processor`), logs
+  via `print` plutôt que `logging`.
 - Dépendance implicite à `ffmpeg`/`ffprobe` (aucun venv/requirements) ; suivi du temps
   **non configuré** (`devtime`).
 

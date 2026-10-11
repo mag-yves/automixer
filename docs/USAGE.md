@@ -56,15 +56,23 @@ PY
 
 ## Comportement
 
-Pour chaque vidéo détectée dans `videosource` :
-- un fichier son est choisi aléatoirement dans `soundsource`, en privilégiant les 20 sons les moins utilisés (compteur tenu dans `sound_usage_log.json`)
+Pour chaque vidéo détectée dans `videosource`, le script produit
+`ASSIGNMENTS_PER_VIDEO` sorties (2 par défaut, cf. `config/settings.py`). Pour chaque
+attribution :
+- un fichier son est choisi **aléatoirement** dans `soundsource` : un tirage uniforme est
+  refait **avant chaque attribution**, en évitant simplement le son immédiatement précédent.
+  Le journal `sound_usage_log.json` n'influence pas le tirage (statistiques uniquement).
 - la piste audio de la vidéo est remplacée
 - le son est coupé pour correspondre à la durée de la vidéo
 - la sortie est enregistrée sous le format :
   - `nom_video_snd_1.mp4`
   - `nom_video_snd_2.mp4`
   - etc.
-- un fichier `<nom_du_sous-dossier>_sound_<n>.txt` est ajouté dans le dossier de la vidéo avec le nom du son utilisé et l’horodatage
+- un fichier `<nom_du_sous-dossier>_sound_<n>.txt` est ajouté dans le dossier de la vidéo avec
+  le nom du son utilisé et l’horodatage (même numéro d’itération que la sortie)
+
+Le nombre d’attributions par vidéo se règle via `ASSIGNMENTS_PER_VIDEO` dans
+`config/settings.py`.
 
 ## Mise à jour manuelle du journal d'utilisation
 
