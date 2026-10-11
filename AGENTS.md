@@ -43,7 +43,7 @@ python3 automixer/source_validator.py      # vérifie videosource / soundsource
   **statistique uniquement** et n'influence jamais le tirage ; il n'est **pas** mis à jour
   pendant le run (reconstruction manuelle via `update-usage.sh`).
 - **Attributions multiples** : chaque vidéo reçoit `ASSIGNMENTS_PER_VIDEO` sorties
-  (`config/settings.py`, défaut 2). Un tirage aléatoire **frais** est refait avant chaque
+  (`config/settings.py`, défaut 4). Un tirage aléatoire **frais** est refait avant chaque
   attribution ; `process_videos(..., assignments_per_video=N)` surcharge le réglage (tests).
 - **La durée de la vidéo est la référence** : le son est coupé s'il est plus long ; aucun
   bouclage.

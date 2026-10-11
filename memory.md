@@ -14,7 +14,7 @@
 - Utilitaires : `update-usage.sh` (reconstruction du journal), `show-usage.sh` (dashboard),
   `start.sh` (menu). Sélection **uniforme** (commit `96f13bd`) : le journal d'usage est
   purement statistique et ne pèse plus sur le tirage.
-- **Attributions multiples** : `ASSIGNMENTS_PER_VIDEO` (`config/settings.py`, défaut 2) →
+- **Attributions multiples** : `ASSIGNMENTS_PER_VIDEO` (`config/settings.py`, défaut 4) →
   chaque vidéo reçoit N sorties, tirage aléatoire **frais** avant chaque attribution
   (anti-répétition immédiate conservée). Validé sur le lot réel (3 vidéos × 2 = 6 sorties).
 - **31 tests** `unittest` verts (`python3 -m unittest discover -s tests`), FFmpeg 8.x.

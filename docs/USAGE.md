@@ -57,7 +57,7 @@ PY
 ## Comportement
 
 Pour chaque vidéo détectée dans `videosource`, le script produit
-`ASSIGNMENTS_PER_VIDEO` sorties (2 par défaut, cf. `config/settings.py`). Pour chaque
+`ASSIGNMENTS_PER_VIDEO` sorties (4 par défaut, cf. `config/settings.py`). Pour chaque
 attribution :
 - un fichier son est choisi **aléatoirement** dans `soundsource` : un tirage uniforme est
   refait **avant chaque attribution**, en évitant simplement le son immédiatement précédent.
