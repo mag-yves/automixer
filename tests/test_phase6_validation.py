@@ -61,7 +61,12 @@ class Phase6ValidationTests(unittest.TestCase):
                     check=True,
                 )
 
-            outputs = process_videos(videos_root, sounds_root, usage_log_path=root / "sound_usage_log.json")
+            outputs = process_videos(
+                videos_root,
+                sounds_root,
+                usage_log_path=root / "sound_usage_log.json",
+                assignments_per_video=1,
+            )
 
             self.assertEqual(len(outputs), 3)
             for output in outputs:

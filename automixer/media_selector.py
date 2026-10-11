@@ -45,9 +45,10 @@ def choose_audio_for_video(
 ) -> Path:
     """Choisit un fichier audio au hasard, en évitant si possible le précédent son.
 
-    Le tirage est uniforme parmi tous les sons disponibles, quel que soit leur
-    usage passé : `sound_usage_log.json` ne sert que de statistique et n'influence
-    plus la sélection.
+    Un tirage uniforme frais est effectué à chaque appel (y compris lors des
+    attributions successives d'une même vidéo), quel que soit l'usage passé :
+    `sound_usage_log.json` ne sert que de statistique et n'influence plus la
+    sélection.
     """
     candidates = [path for path in audio_files if path.exists()]
     if not candidates:
